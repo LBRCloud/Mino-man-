@@ -8,18 +8,72 @@ public class Movementscript : MonoBehaviour
 {
 
 	//private Vector2 destination;
+	public float sightLength = 1.2f;
+	public float sightStart = 0.5f;
 	public float speed;
 	public float strength = 100f;
+
 	public Canvas defeatcanvas;
 
-//	void Start () 
-//	{
+	public Vector3 targetPos;
+	public Vector3 lastPos;
+
+	void Start () 
+	{
 //		destination.x = this.gameObject.transform.position.x;
 //		destination.y = this.gameObject.transform.position.y;
-//	}
+		lastPos = transform.position;
+		targetPos = lastPos;
+	}
 		
-	void Update () 
+	void Update ()
 	{
+		if (lastPos == targetPos)
+		{
+
+			Vector3 dir = Vector3.zero;
+
+			if (Input.GetAxis ("Horizontal") < 0)
+			{
+				dir = Vector3.left;
+			}
+
+			if (Input.GetAxis ("Horizontal") > 0)
+			{
+				dir = Vector3.right;
+			}
+
+			if (Input.GetAxis ("Vertical") < 0)
+			{
+				dir = Vector3.down;
+			}
+
+			if (Input.GetAxis ("Vertical") > 0)
+			{
+				dir = Vector3.up;
+			}
+			RaycastHit2D sight = Physics2D.Linecast (transform.position + (dir * sightStart), transform.position + (dir * sightLength));
+			Debug.DrawLine (transform.position + (dir * sightStart), transform.position + (dir * sightLength), Color.red, 1.5f);
+
+			if (sight.collider != null)
+			{
+				targetPos = sight.collider.GetComponent<Transform> ().position;
+			}
+		}
+
+		else
+		{
+
+			if (transform.position != targetPos)
+			{
+				transform.position = Vector3.MoveTowards (transform.position, targetPos, Time.deltaTime);
+			}
+
+			else
+			{
+				lastPos = targetPos;
+			}
+		}
 		/*if (Input.GetKey (KeyCode.W)) 
 			{
 				transform.Translate (Vector3.up * Time.deltaTime);
@@ -38,16 +92,16 @@ public class Movementscript : MonoBehaviour
 			}*/
 
 
-
-		if (Input.GetAxis ("Vertical") != 0)
-		{
-			transform.Translate (Vector3.up * Time.deltaTime * Input.GetAxis ("Vertical"));
-		}
-
-		if (Input.GetAxis ("Horizontal") != 0)
-		{
-			transform.Translate (Vector3.right * Time.deltaTime * Input.GetAxis ("Horizontal"));
-		}
+//
+//		if (Input.GetAxis ("Vertical") != 0)
+//		{
+//			transform.Translate (Vector3.up * Time.deltaTime * Input.GetAxis ("Vertical"));
+//		}
+//
+//		if (Input.GetAxis ("Horizontal") != 0)
+//		{
+//			transform.Translate (Vector3.right * Time.deltaTime * Input.GetAxis ("Horizontal"));
+//		}
 
 		//		if (this.gameObject.transform.position != new Vector3(destination.x, destination.y, -0.5)
 		//			{
