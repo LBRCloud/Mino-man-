@@ -11,11 +11,7 @@ GameObject:
   - 212: {fileID: 21289098}
   m_Layer: 0
   m_Name: Pillar
-<<<<<<< HEAD
   m_TagString: Pillar
-=======
-  m_TagString: Untagged
->>>>>>> refs/remotes/origin/Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,13 +77,10 @@ Prefab:
       propertyPath: m_Color.b
       value: 0.6838235
       objectReference: {fileID: 0}
-<<<<<<< HEAD
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Pillar
       objectReference: {fileID: 0}
-=======
->>>>>>> refs/remotes/origin/Level
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 130464}
