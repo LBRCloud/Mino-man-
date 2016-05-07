@@ -826,6 +826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40037159b60147c469f48a4ad9fd9337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   sightLength: 1.2
   sightStart: 0.5
   speed: 0
@@ -833,6 +834,11 @@ MonoBehaviour:
   defeatcanvas: {fileID: 829578851}
   targetPos: {x: 0, y: 0, z: 0}
   lastPos: {x: 0, y: 0, z: 0}
+=======
+  speed: 0
+  strength: 100
+  defeatcanvas: {fileID: 829578851}
+>>>>>>> refs/remotes/origin/Level
 --- !u!1001 &325227687
 Prefab:
   m_ObjectHideFlags: 0
@@ -994,7 +1000,11 @@ Transform:
   - {fileID: 489915296}
   - {fileID: 830402095}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 11
+=======
+  m_RootOrder: 12
+>>>>>>> refs/remotes/origin/Level
 --- !u!1001 &378354711
 Prefab:
   m_ObjectHideFlags: 0
@@ -3836,7 +3846,11 @@ Transform:
   - {fileID: 1011001266}
   - {fileID: 1809959951}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 12
+=======
+  m_RootOrder: 13
+>>>>>>> refs/remotes/origin/Level
 --- !u!1001 &1293810983
 Prefab:
   m_ObjectHideFlags: 0

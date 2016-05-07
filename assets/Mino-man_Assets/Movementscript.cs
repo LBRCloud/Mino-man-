@@ -8,6 +8,7 @@ public class Movementscript : MonoBehaviour
 {
 
 	//private Vector2 destination;
+<<<<<<< HEAD
 	public float sightLength = 1.2f;
 	public float sightStart = 0.5f;
 	public float speed;
@@ -74,6 +75,20 @@ public class Movementscript : MonoBehaviour
 				lastPos = targetPos;
 			}
 		}
+=======
+	public float speed;
+	public float strength = 100f;
+	public Canvas defeatcanvas;
+
+//	void Start () 
+//	{
+//		destination.x = this.gameObject.transform.position.x;
+//		destination.y = this.gameObject.transform.position.y;
+//	}
+		
+	void Update () 
+	{
+>>>>>>> refs/remotes/origin/Level
 		/*if (Input.GetKey (KeyCode.W)) 
 			{
 				transform.Translate (Vector3.up * Time.deltaTime);
@@ -92,6 +107,7 @@ public class Movementscript : MonoBehaviour
 			}*/
 
 
+<<<<<<< HEAD
 //
 //		if (Input.GetAxis ("Vertical") != 0)
 //		{
@@ -102,6 +118,18 @@ public class Movementscript : MonoBehaviour
 //		{
 //			transform.Translate (Vector3.right * Time.deltaTime * Input.GetAxis ("Horizontal"));
 //		}
+=======
+
+		if (Input.GetAxis ("Vertical") != 0)
+		{
+			transform.Translate (Vector3.up * Time.deltaTime * Input.GetAxis ("Vertical"));
+		}
+
+		if (Input.GetAxis ("Horizontal") != 0)
+		{
+			transform.Translate (Vector3.right * Time.deltaTime * Input.GetAxis ("Horizontal"));
+		}
+>>>>>>> refs/remotes/origin/Level
 
 		//		if (this.gameObject.transform.position != new Vector3(destination.x, destination.y, -0.5)
 		//			{
