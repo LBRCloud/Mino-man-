@@ -13,13 +13,15 @@ public class Movementscript : MonoBehaviour
 
 	//raycast as linecast start and end points (from transform position)
 	public float sightLength = 1.2f;
-	public float sightStart = 1f;
+	public float sightStart = .7f;
 
 
 	public Canvas defeatcanvas;
 
 
 
+	// minoman's game object
+	public GameObject minoman;
 	// minoman's pace
 	public float minomanSpeed = 1f;
 	// minoman's strength
@@ -29,8 +31,9 @@ public class Movementscript : MonoBehaviour
 	public float strregen = .1f;
 	// minoman's strength modifier
 	public float strmod;
-	// minoman's collision
-	public bool isColliding;
+	//minoman's damage output
+	public float minodmgout = 1;
+
 
 
 
@@ -40,8 +43,6 @@ public class Movementscript : MonoBehaviour
 		//set lastupdatedpos Vector3 as targetPos at start.
 		lastupdatedpos = transform.position;
 		targetPos = lastupdatedpos;
-		// minoman's coliison set to false at start
-		isColliding = false;
 	}
 		
 	void Update ()
@@ -90,38 +91,66 @@ public class Movementscript : MonoBehaviour
 			// controller reset to zero position.
 			Vector3 dir = Vector3.zero;
 
-			// if controller is being used set the direction variable respectfully 
+			// if controller is being used set the direction variable respectfully, also set transform direction.
 			if (Input.GetAxis ("Horizontal") < 0)
 			{
 				dir = Vector3.left;
+				minoman.transform.localEulerAngles = new Vector3 (0, 0, -90);
 			}
 
 			if (Input.GetAxis ("Horizontal") > 0)
 			{
 				dir = Vector3.right;
+				minoman.transform.localEulerAngles = new Vector3 (0, 0, 90);
 			}
 
 			if (Input.GetAxis ("Vertical") < 0)
 			{
 				dir = Vector3.down ;
+				minoman.transform.localEulerAngles = new Vector3 (0, 0, 0);
 			}
 
 			if (Input.GetAxis ("Vertical") > 0)
 			{
 				dir = Vector3.up;
+				minoman.transform.localEulerAngles = new Vector3 (0, 0, 180);
 			}
 
 			// set raycast as linecast from transform position, setting start and end points
 			RaycastHit2D sight = Physics2D.Linecast (transform.position + (dir * sightStart), transform.position + (dir * sightLength));
 			Debug.DrawLine (transform.position + (dir * sightStart), transform.position + (dir * sightLength), Color.red, 1.5f);
 
-			// if the raycast as linecast has a collider (basically if raycast exists) 
-			if (sight.collider != null)
-			{
+			// if the raycast as linecast has detected a collider (basically if raycast found any collider,
+			// the first one it runs into) 
+			// A: Did it hit something?
+			if(sight.collider != null) {
+				// A: What did it hit?
+				if (sight.collider.gameObject.tag != "Princess" || "Knight")
+				{
+					Debug.Log (sight.collider.name);
+					// change the Vector3 target position to the raycast position.
+					targetPos = sight.collider.GetComponent<Transform> ().position;
+				}
+				else if (sight.collider.gameObject.tag == "Princess")
+				{
+					Debug.Log ("its a hit!");
 
+					//loss of strength
+					strengthmodifier ();
+					strength -= strmod;
 
-				// change the Vector3 target position to the raycast position.
-				targetPos = sight.collider.GetComponent<Transform> ().position;
+					//loss of enemy strength
+				}
+				else if (sight.collider.gameObject.tag == "Knight")
+				{
+					Debug.Log ("its a hit!");
+
+					//loss of strength
+					strengthmodifier ();
+					strength -= strmod;
+
+					//loss of enemy strength
+				}
 			}
 		}
 
@@ -160,52 +189,6 @@ public class Movementscript : MonoBehaviour
 	}
 
 
-//	public void OnCollisionEnter2D(Collision2D anObstacle)
-//	{
-//		//freeze obstacle
-//		//anObstacle.rigidbody.constraints = RigidbodyConstraints2D.FreezePosition;
-//		//minomanis colliding with something
-//		isColliding = true;
-//		Debug.Log ("col");
-//	}
-//
-//	public void OnCollisionExit2D(Collision2D anObstacle)
-//	{
-//		//unfreeze obstacle
-//		anObstacle.rigidbody.constraints = RigidbodyConstraints2D.None;
-//		//minoman is no longer colliding with something
-//		isColliding = false;
-//		Debug.Log ("not col");
-//	}
-//		if (anObstacle.gameObject.name == "Knight_Sprite(Clone)")
-//
-//		{
-//			strengthmodifier ();
-//			strength -= strmod;
-//			Debug.Log ("Mino-man's STR: " + strength);
-//
-//			knightscript knightscript = GameObject.Find ("Knight_Sprite(Clone)").GetComponent<knightscript>();
-//			// damage enemy strength
-//			knightscript.enemystrength -= 1f;
-//			// Display enemy total
-//			Debug.Log ("Knight's STR: " + knightscript.enemystrength);
-//
-//		}
-//
-//		else if (anObstacle.gameObject.name == "Princess_Sprite(Clone)") 
-//
-//		{
-//			strengthmodifier ();
-//			strength -= strmod;
-//			Debug.Log ("Mino-man's STR: " + strength);
-//
-//			princessscript princessscript = GameObject.Find ("Princess_Sprite(Clone)").GetComponent<princessscript>();
-//			// damage enemy strength
-//			princessscript.enemystrength -= 1f;
-//			// Display enemy total
-//			Debug.Log ("Princess's's STR: " + princessscript.enemystrength);
-//		} 
-			
-	//}
+
 
 }
