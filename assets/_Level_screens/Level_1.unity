@@ -856,7 +856,7 @@ MonoBehaviour:
   minoman: {fileID: 298785617}
   minomanSpeed: 1.5
   strength: 100
-  regentimer: 1
+  regentimer: 0.2
   strregen: 0.5
   strmod: 0
   minodmgout: 1
@@ -5347,11 +5347,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 429870, guid: de93c5d1440ccf743a2254cc9f25859f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 429870, guid: de93c5d1440ccf743a2254cc9f25859f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: 429870, guid: de93c5d1440ccf743a2254cc9f25859f, type: 2}
       propertyPath: m_LocalPosition.z

@@ -27,8 +27,8 @@ public class Movementscript : MonoBehaviour
 	// minoman's strength
 	public float strength = 100f;
 	// minoman's strength regen
-	public float regentimer = 60f;
-	public float strregen = .1f;
+	public float regentimer = .2f;
+	public float strregen = .5f;
 	// minoman's strength modifier
 	public float strmod;
 	//minoman's damage output
@@ -54,37 +54,37 @@ public class Movementscript : MonoBehaviour
 			// show defeat canvas
 			defeatcanvas.enabled = true;
 			// destroy mino-man gameobject
-			Destroy (gameObject, 3f);
+			Destroy (gameObject, 2f);
 
 			//pause game?? Time.timeScale = 0;
 		}
-//		if (strength < 100)
-//		{
-//			//regen timer
-//			regentimer -= Time.deltaTime;
-//
-//			if (regentimer < 0)
-//			{
-//				//regen
-//				strength += strregen;
-//				regentimer = 60f;
-//				// strength reset to 100 when it goes above 100
-//				if (strength > 100)
-//				{
-//					strength = 100;
-//					regentimer = 360f;
-//				}
-//
-//				else if (strength == 100)
-//				{
-//					regentimer = 360f;
-//				}
-//				Debug.Log ("Mino-man's STR: " + strength);
-//
-//			}
-//				
-//			
-//		}
+
+
+		// STRENGTH REGEN
+		if (strength < 100)
+		{
+			//regen timer
+			regentimer -= Time.deltaTime;
+			//Debug.Log (regentimer);
+
+			if (regentimer < 0)
+			{
+				//regen
+				strength += strregen;
+				regentimer = .04f;
+				Debug.Log ("Mino-man's STR: " + strength);
+				// strength reset to 100 when it goes above 100
+			}
+		}
+		else if (strength > 100)
+		{
+			strength = 100;
+			regentimer = .2f;
+			Debug.Log ("Mino-man's STR: " + strength);
+		}
+
+
+
 		// if target is at last "updated" position (position changes finished)
 		if (lastupdatedpos == targetPos)
 		{
@@ -129,7 +129,7 @@ public class Movementscript : MonoBehaviour
 				
 				if (sight.collider.gameObject.tag == "Princess")
 				{
-					Debug.Log ("its a hit!");
+					//Debug.Log ("its a hit!");
 
 					//loss of strength
 					strengthmodifier ();
@@ -139,10 +139,13 @@ public class Movementscript : MonoBehaviour
 					princessscript princessscript = GameObject.Find ("Princess_Sprite(Clone)").GetComponent<princessscript>();
 					princessscript.enemystrength -= minodmgout;
 					Debug.Log ("Princess's's STR: " + princessscript.enemystrength);
+					Debug.Log ("Mino-man's STR: " + strength);
 				}
+
+
 				else if (sight.collider.gameObject.tag == "Knight")
 				{
-					Debug.Log ("its a hit!");
+					//Debug.Log ("its a hit!");
 
 					//loss of strength
 					strengthmodifier ();
@@ -152,11 +155,12 @@ public class Movementscript : MonoBehaviour
 					knightscript knightscript = GameObject.Find ("Knight_Sprite(Clone)").GetComponent<knightscript>();
 					knightscript.enemystrength -= minodmgout;
 					Debug.Log ("Knight's STR: " + knightscript.enemystrength);
+					Debug.Log ("Mino-man's STR: " + strength);
 				}
 				// A: What did it hit?
 				else
 				{
-					Debug.Log (sight.collider.name);
+					//Debug.Log (sight.collider.name);
 					// change the Vector3 target position to the raycast position.
 					targetPos = sight.collider.GetComponent<Transform> ().position;
 				}
