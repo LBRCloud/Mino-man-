@@ -33,6 +33,8 @@ public class Movementscript : MonoBehaviour
 	public float strmod;
 	//minoman's damage output
 	public float minodmgout = 1f;
+	//minoman enemy armor
+	public float knightArmor = .75f;
 
 
 
@@ -48,7 +50,7 @@ public class Movementscript : MonoBehaviour
 	void Update ()
 	{
 
-		// if strength is below 0
+		// if strength is below 0, MINOMAN DIES
 		if (strength < 0)
 		{ //stop all other routines,playdeath animation 2-3 seconds
 			// show defeat canvas
@@ -60,7 +62,7 @@ public class Movementscript : MonoBehaviour
 		}
 
 
-		// STRENGTH REGEN
+		// if strength is below 100, STRENGTH REGEN 
 		if (strength < 100)
 		{
 			//regen timer
@@ -153,7 +155,7 @@ public class Movementscript : MonoBehaviour
 
 					//loss of enemy strength
 					knightscript knightscript = GameObject.Find ("Knight_Sprite(Clone)").GetComponent<knightscript>();
-					knightscript.enemystrength -= minodmgout;
+					knightscript.enemystrength -= minodmgout * knightArmor;
 					Debug.Log ("Knight's STR: " + knightscript.enemystrength);
 					Debug.Log ("Mino-man's STR: " + strength);
 				}
