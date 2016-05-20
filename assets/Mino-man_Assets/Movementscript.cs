@@ -32,7 +32,7 @@ public class Movementscript : MonoBehaviour
 	// minoman's strength modifier
 	public float strmod;
 	//minoman's damage output
-	public float minodmgout = 1;
+	public float minodmgout = 1f;
 
 
 
@@ -120,18 +120,14 @@ public class Movementscript : MonoBehaviour
 			RaycastHit2D sight = Physics2D.Linecast (transform.position + (dir * sightStart), transform.position + (dir * sightLength));
 			Debug.DrawLine (transform.position + (dir * sightStart), transform.position + (dir * sightLength), Color.red, 1.5f);
 
+
+
 			// if the raycast as linecast has detected a collider (basically if raycast found any collider,
 			// the first one it runs into) 
 			// A: Did it hit something?
-			if(sight.collider != null) {
-				// A: What did it hit?
-				if (sight.collider.gameObject.tag != "Princess" || "Knight")
-				{
-					Debug.Log (sight.collider.name);
-					// change the Vector3 target position to the raycast position.
-					targetPos = sight.collider.GetComponent<Transform> ().position;
-				}
-				else if (sight.collider.gameObject.tag == "Princess")
+			if (sight.collider != null) {
+				
+				if (sight.collider.gameObject.tag == "Princess")
 				{
 					Debug.Log ("its a hit!");
 
@@ -140,6 +136,9 @@ public class Movementscript : MonoBehaviour
 					strength -= strmod;
 
 					//loss of enemy strength
+					princessscript princessscript = GameObject.Find ("Princess_Sprite(Clone)").GetComponent<princessscript>();
+					princessscript.enemystrength -= minodmgout;
+					Debug.Log ("Princess's's STR: " + princessscript.enemystrength);
 				}
 				else if (sight.collider.gameObject.tag == "Knight")
 				{
@@ -150,6 +149,16 @@ public class Movementscript : MonoBehaviour
 					strength -= strmod;
 
 					//loss of enemy strength
+					knightscript knightscript = GameObject.Find ("Knight_Sprite(Clone)").GetComponent<knightscript>();
+					knightscript.enemystrength -= minodmgout;
+					Debug.Log ("Knight's STR: " + knightscript.enemystrength);
+				}
+				// A: What did it hit?
+				else
+				{
+					Debug.Log (sight.collider.name);
+					// change the Vector3 target position to the raycast position.
+					targetPos = sight.collider.GetComponent<Transform> ().position;
 				}
 			}
 		}

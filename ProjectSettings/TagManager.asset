@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Obstacle
+  - Knight
+  - Princess
   layers:
   - Default
   - TransparentFX

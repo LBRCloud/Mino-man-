@@ -859,7 +859,7 @@ MonoBehaviour:
   regentimer: 1
   strregen: 0.5
   strmod: 0
-  isColliding: 0
+  minodmgout: 1
 --- !u!58 &298785619
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3720,7 +3720,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 106840, guid: 7b5f8755c3871664086b4574822c00f2, type: 2}
       propertyPath: m_TagString
-      value: Untagged
+      value: Princess
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6149182, guid: 7b5f8755c3871664086b4574822c00f2, type: 2}
@@ -5324,7 +5324,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400666, guid: 5504a6c5590b03f4584fe725de102bb6, type: 2}
       propertyPath: enemystrength
-      value: 500
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5079076, guid: 5504a6c5590b03f4584fe725de102bb6, type: 2}
       propertyPath: m_AngularDrag
@@ -5332,7 +5332,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 177960, guid: 5504a6c5590b03f4584fe725de102bb6, type: 2}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Knight
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6128018, guid: 5504a6c5590b03f4584fe725de102bb6, type: 2}

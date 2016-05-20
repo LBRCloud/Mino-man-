@@ -3,7 +3,7 @@ using System.Collections;
 
 public class knightscript : MonoBehaviour 
 {
-	public float enemystrength = 500f;
+	public float enemystrength = 50f;
 
 	void Update()
 	{
