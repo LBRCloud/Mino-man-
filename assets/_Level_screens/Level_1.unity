@@ -539,8 +539,25 @@ Prefab:
       propertyPath: defeatcanvas
       value: 
       objectReference: {fileID: 130486, guid: 14c69c49b8c169d44abf66bc558d9106, type: 2}
+    - target: {fileID: 5053060, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5053060, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5053060, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5053060, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
+      propertyPath: m_AngularDrag
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11497732, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
+    - {fileID: 6125390, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &205684072 stripped
@@ -826,13 +843,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40037159b60147c469f48a4ad9fd9337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightLength: 1.2
-  sightStart: 0.5
-  speed: 0
-  strength: 100
-  defeatcanvas: {fileID: 829578851}
   targetPos: {x: 0, y: 0, z: 0}
-  lastPos: {x: 0, y: 0, z: 0}
+  lastupdatedpos: {x: 0, y: 0, z: 0}
+  sightLength: 1.2
+  sightStart: 1
+  defeatcanvas: {fileID: 829578851}
+  minomanSpeed: 1.5
+  strength: 100
+  regentimer: 1
+  strregen: 0.5
+  strmod: 0
+  isColliding: 0
+--- !u!58 &298785619
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 298785617}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.15
 --- !u!1001 &325227687
 Prefab:
   m_ObjectHideFlags: 0
@@ -1390,8 +1425,8 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 177960, guid: 5504a6c5590b03f4584fe725de102bb6, type: 2}
   m_PrefabInternal: {fileID: 1832071427}
---- !u!61 &453148168
-BoxCollider2D:
+--- !u!58 &453148168
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1403,7 +1438,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
+  m_Radius: 0.10000002
 --- !u!1001 &489915295
 Prefab:
   m_ObjectHideFlags: 0
@@ -5298,7 +5333,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5079076, guid: 5504a6c5590b03f4584fe725de102bb6, type: 2}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5079076, guid: 5504a6c5590b03f4584fe725de102bb6, type: 2}
       propertyPath: m_GravityScale
@@ -5307,6 +5342,10 @@ Prefab:
     - target: {fileID: 11400666, guid: 5504a6c5590b03f4584fe725de102bb6, type: 2}
       propertyPath: enemystrength
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079076, guid: 5504a6c5590b03f4584fe725de102bb6, type: 2}
+      propertyPath: m_AngularDrag
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6128018, guid: 5504a6c5590b03f4584fe725de102bb6, type: 2}
@@ -5754,11 +5793,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1974421791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4923426, y: -0.28463668, z: 3.109375}
+  m_LocalPosition: {x: -1.38, y: 0, z: 3.109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
 --- !u!1001 &2025796428
 Prefab:
   m_ObjectHideFlags: 0
