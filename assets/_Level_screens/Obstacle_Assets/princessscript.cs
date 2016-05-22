@@ -10,6 +10,8 @@ public class princessscript : MonoBehaviour
 		if (enemystrength < 0f) 
 
 		{
+			enemySpawn enemySpawn = GameObject.Find ("Game Manager").GetComponent<enemySpawn> ();
+			enemySpawn.existingEnemies -= 1;
 			Destroy (gameObject, .01f);
 		}
 	}
