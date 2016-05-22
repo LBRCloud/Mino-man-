@@ -37,6 +37,9 @@ public class Movementscript : MonoBehaviour
 	public float knightArmor = .75f;
 
 
+	public GameObject[] obstacleArray;
+
+
 
 
 
