@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
+
 public class Movementscript : MonoBehaviour 
 
 {
@@ -37,6 +39,7 @@ public class Movementscript : MonoBehaviour
 	public int curstricon;
 	public Sprite[] striconstorage;
 	public SpriteRenderer ingamesprite;
+
 
 
 	//stair location
@@ -178,10 +181,11 @@ public class Movementscript : MonoBehaviour
 		if (stairs == null) 
 		{
 			stairs = GameObject.Find ("Stairs(Clone)");
-			if (stairs == null) {
 
-			} else {
+			if (stairs != null) 
+			{
 				Debug.Log ("stairs appeared");
+
 			}
 		}
 		else if (targetPos == stairs.transform.position) 
