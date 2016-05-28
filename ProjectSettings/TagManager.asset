@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Knight
   - Princess
-  - Pillar
-  - Stairs
   layers:
   - Default
   - TransparentFX

@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
-
 public class Movementscript : MonoBehaviour 
 
 {
@@ -42,8 +40,8 @@ public class Movementscript : MonoBehaviour
 
 
 
-	//stair location
-	public GameObject stairs;
+
+
 
 
 	void Start () 
@@ -52,14 +50,13 @@ public class Movementscript : MonoBehaviour
 		lastupdatedpos = transform.position;
 		targetPos = lastupdatedpos;
 	}
-
-
 		
 	void Update ()
 	{
 
 		// if strength is below 0
-		if (strength < 0) { //stop all other routines,playdeath animation 2-3 seconds
+		if (strength < 0)
+		{ //stop all other routines,playdeath animation 2-3 seconds
 			// show defeat canvas
 			defeatcanvas.enabled = true;
 			// destroy mino-man gameobject
@@ -70,52 +67,63 @@ public class Movementscript : MonoBehaviour
 
 
 		// STRENGTH REGEN
-		if (strength < 100) {
+		if (strength < 100)
+		{
 			//regen timer
 			regentimer -= Time.deltaTime;
 			//Debug.Log (regentimer);
 
-			if (regentimer < 0) {
+			if (regentimer < 0)
+			{
 				//regen
 				strength += strregen;
 				regentimer = .04f;
 				Debug.Log ("Mino-man's STR: " + strength);
 				// strength reset to 100 when it goes above 100
 			}
-		} else if (strength > 100) {
+		}
+		else if (strength > 100)
+		{
 			strength = 100;
 			regentimer = .2f;
 			Debug.Log ("Mino-man's STR: " + strength);
 		}
 
-		if (strength != null) {
+		if (strength != null) 
+		{
 			strengthicon ();
+
 		}
 
 
 
 		// if target is at last "updated" position (position changes finished)
-		if (lastupdatedpos == targetPos) {
+		if (lastupdatedpos == targetPos)
+		{
 			// controller reset to zero position.
 			Vector3 dir = Vector3.zero;
 
 			// if controller is being used set the direction variable respectfully, also set transform direction.
-			if (Input.GetAxis ("Horizontal") < 0) {
+			if (Input.GetAxis ("Horizontal") < 0)
+			{
 				dir = Vector3.left;
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, -90);
 			}
 
-			if (Input.GetAxis ("Horizontal") > 0) {
+			if (Input.GetAxis ("Horizontal") > 0)
+			{
 				dir = Vector3.right;
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, 90);
 			}
 
-			if (Input.GetAxis ("Vertical") < 0) {
-				dir = Vector3.down;
+			if (Input.GetAxis ("Vertical") < 0)
+			{
+				dir = Vector3.down ;
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, 0);
 			}
 
-			if (Input.GetAxis ("Vertical") > 0) {
+			if (Input.GetAxis ("Vertical") > 0)
+			{
 				dir = Vector3.up;
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, 180);
 			}
@@ -131,7 +139,8 @@ public class Movementscript : MonoBehaviour
 			// A: Did it hit something?
 			if (sight.collider != null) {
 				
-				if (sight.collider.gameObject.tag == "Princess") {
+				if (sight.collider.gameObject.tag == "Princess")
+				{
 					//Debug.Log ("its a hit!");
 
 					//loss of strength
@@ -139,72 +148,61 @@ public class Movementscript : MonoBehaviour
 					strength -= strmod;
 
 					//loss of enemy strength
-					princessscript princessscript = sight.collider.gameObject.GetComponent<princessscript> ();
+					princessscript princessscript = sight.collider.gameObject.GetComponent<princessscript>();
 					princessscript.enemystrength -= minodmgout;
 					Debug.Log ("Princess's's STR: " + princessscript.enemystrength);
 					Debug.Log ("Mino-man's STR: " + strength);
-				} else if (sight.collider.gameObject.tag == "Knight") {
+				}
+
+
+				else if (sight.collider.gameObject.tag == "Knight")
+				{
 
 					//loss of mino strength
 					strengthmodifier ();
 					strength -= strmod;
 
 					//loss of enemy strength
-					knightscript knightscript = sight.collider.gameObject.GetComponent<knightscript> ();
+					knightscript knightscript = sight.collider.gameObject.GetComponent<knightscript>();
 					knightscript.enemystrength -= minodmgout;
 					Debug.Log ("Knight's STR: " + knightscript.enemystrength);
 					Debug.Log ("Mino-man's STR: " + strength);
 				}
 				// A: What did it hit?
-				else {
+				else
+				{
 					//Debug.Log (sight.collider.name);
 					// change the Vector3 target position to the raycast position.
 					targetPos = sight.collider.GetComponent<Transform> ().position;
 				}
 			}
-		} else {
+		}
+
+		else
+			
+		{
 			// if transform position is different than the target position, then move towards the position in
 			// relationship of seconds * speed
-			if (transform.position != targetPos) {
+			if (transform.position != targetPos)
+			{
 				transform.position = Vector3.MoveTowards (transform.position, targetPos, Time.deltaTime * minomanSpeed);
 			}
 
 			// if for any reason lastupdated position variable isn't = to the traget position, and the current transform
 			// posiiton makes it to the target position then change the last  updated position to the target
 			// position variable. (this stops movement).
-			else {
+			else
+			{
 				lastupdatedpos = targetPos;
 			}
 		}
-
-		// NEXT LEVEL
-		if (stairs == null) 
-		{
-			stairs = GameObject.Find ("Stairs(Clone)");
-
-			if (stairs != null) 
-			{
-				Debug.Log ("stairs appeared");
-
-			}
-		}
-		else if (targetPos == stairs.transform.position) 
-		{
-			Debug.Log ("you found the stairs");
-		}
-			
-	}
-		
-	
-
-
 
 
 //				if (Input.GetButtonDown ("Rage")) 
 //					{
 //						//do this thing.
 //					}
-
+	}
 
 	void strengthmodifier ()
 	{
@@ -219,7 +217,6 @@ public class Movementscript : MonoBehaviour
 		curstricon = (int)Mathf.Floor (strength / 15) -1;
 		ingamesprite.sprite = striconstorage [curstricon];
 	}
-
 
 
 }

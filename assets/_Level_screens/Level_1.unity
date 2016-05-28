@@ -868,7 +868,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 61347a3b37872b841bcfb55a1197bd0f, type: 3}
   - {fileID: 21300000, guid: 631efbe582fc7ce41a1cf3531031eb22, type: 3}
   ingamesprite: {fileID: 992495988}
-  stairs: {fileID: 0}
 --- !u!58 &298785619
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4931,9 +4930,6 @@ MonoBehaviour:
   - {fileID: 414855443}
   - {fileID: 1011001266}
   - {fileID: 1809959951}
-  princessdeathCount: 0
-  levelObjective: 3
-  nextlevel: {fileID: 197318, guid: 2993350ecd420a34ead3d9b8e06fed28, type: 2}
 --- !u!4 &1706477539
 Transform:
   m_ObjectHideFlags: 0

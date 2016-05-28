@@ -1,41 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-
-
 
 public class enemySpawn : MonoBehaviour
 {
-	// CREATING LIST OF OBSTACLES
-	List<GameObject> ObstacleList = new List<GameObject> ();
-
-	//ASSET REFERENCES
-	public Transform[] spawnplacement; //spawn points
+	public float timeRemaining;
 	public GameObject KnightSprite;
 	public GameObject PrincessSprite;
-	public GameObject nextlevel;
 	public GameObject InstantiatethisObstacle;
+	public int ranspawnint;
 
-	// OBSTACLE LOCATIONS
-	public Vector3 nospawnondeadobstacle = new Vector3 (0, 0, 0);
-	public Vector3 nospawnonliveobstacle = new Vector3 (0, 0, 0);
-
-	// GAMEPLAY
-	public float timeRemaining; // time until next obstacle spawn
-	public int existingEnemies; // obstacle count
-	public int ranspawnint; // which obstacle to spawn
-	public int numprincess = 0; // princess spawn rate variable
-	public int princessdeathCount; // how many princesses have died
-	public int levelObjective = 3; // level objective, how many princesses must die
-
+	public int existingEnemies;
+	public Transform[] spawnplacement;
 
 
 	void Start ()
 	{
 		timeRemaining = 5f;
+		ObstacleInstantiate ();
 	}
 	
-
 
 	void Update ()
 	{
@@ -52,25 +35,12 @@ public class enemySpawn : MonoBehaviour
 			}
 		}
 
-		if (princessdeathCount == levelObjective)
-
-		{
-			//spawn stairwell
-			princessdeathCount += 1;
-			Instantiate (nextlevel, spawnplacement [Random.Range
-				(0, spawnplacement.Length)].position, Quaternion.identity);
-			// stop spawning princesses
-			numprincess = 1;
-		}
-
 	}
-
-
 
 	void ObstacleInstantiate ()
 	{
 		//int non-inclusive of top number, never top number
-		ranspawnint = Random.Range (numprincess, 4);
+		ranspawnint = Random.Range (0, 4);
 		if (ranspawnint > 0) 
 		{
 			InstantiatethisObstacle = KnightSprite;
@@ -80,22 +50,14 @@ public class enemySpawn : MonoBehaviour
 		{
 			InstantiatethisObstacle = PrincessSprite;
 		}
-
 		Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();
-		Vector3 nospawnonmino = Movementscript.lastupdatedpos;
-
+		Vector3 nospawnonmino = Movementscript.targetPos;
 		int newspawnnumber = Random.Range (0, spawnplacement.Length);
-
-		if (spawnplacement [newspawnnumber].position != nospawnonmino &&
-			spawnplacement [newspawnnumber].position != nospawnondeadobstacle &&
-			spawnplacement [newspawnnumber].position != nospawnonliveobstacle) 
+		if (spawnplacement [newspawnnumber].position != nospawnonmino) 
 		{
 			Instantiate (InstantiatethisObstacle, spawnplacement [Random.Range (0, spawnplacement.Length)].position, Quaternion.identity);
-
 			existingEnemies += 1;
 		}
-
-
-
 	}
+
 }
