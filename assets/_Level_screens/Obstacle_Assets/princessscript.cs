@@ -12,7 +12,8 @@ public class princessscript : MonoBehaviour
 		{
 			enemySpawn enemySpawn = GameObject.Find ("Game Manager").GetComponent<enemySpawn> ();
 			enemySpawn.existingEnemies -= 1;
-			Destroy (gameObject, .01f);
+			enemySpawn.princessdeathCount += 1;
+			Destroy (gameObject);
 		}
 	}
 }

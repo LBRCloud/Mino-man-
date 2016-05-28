@@ -3,130 +3,76 @@ using System.Collections;
 
 public class enemySpawn : MonoBehaviour
 {
-	public float timeRemaining = 5f;
-	public float timeRemainingPrincess = 15f;
-
-	public float timerKnight;
-	public float timerPrincess;
-
-	public float countdown;
-
-	public GameObject knight;
-	public GameObject princess;
+	public float timeRemaining;
+	public GameObject KnightSprite;
+	public GameObject PrincessSprite;
+	public GameObject InstantiatethisObstacle;
+	public int ranspawnint;
 
 	public int existingEnemies;
+	public Transform[] spawnplacement;
 
-	public Transform[] spawn;
+	// GAMEPLAY
+	public int princessdeathCount;
+	public int levelObjective = 3;
+	public GameObject nextlevel;
 
 
-
-	// Use this for initialization
 	void Start ()
 	{
-
-		SpawnKnight ();
-
-		SpawnPrincess ();
-
-		timerPrincess = timeRemainingPrincess;
-
-		timerKnight = timeRemaining;
-
-		countdown = timeRemaining;
-
+		timeRemaining = 5f;
 	}
 	
 
 	void Update ()
 	{
-		if (timerKnight > 0) 
+		if (timeRemaining > 0) 
 		{
-		
-			timerKnight -= Time.deltaTime;
-
+			timeRemaining -= Time.deltaTime;
 		}
-
-		//Else check if there are 5 enemies or not
 		else
 		{
-			
-			timerKnight = timeRemaining;
-
-			countdown = timeRemaining;
-
-			//If there are 5 existing enemies, then wait for something to change
-			if (existingEnemies == 5)
+			timeRemaining = 5f;
+			if (existingEnemies <= 4) 
 			{
-
-				StartCoroutine ("Checker");
-
-			}
-
-			//Else call Spawn
-			else
-			{
-
-				SpawnKnight ();
-
+				ObstacleInstantiate ();
 			}
 		}
 
+		if (princessdeathCount == levelObjective)
 
-		if (timerPrincess > 0) 
 		{
-
-			timerPrincess -= Time.deltaTime;
-
+			//spawn stairwell
+			princessdeathCount += 1;
+			Instantiate (nextlevel, spawnplacement [Random.Range (0, spawnplacement.Length)].position, Quaternion.identity);
 		}
 
-		//Else check if there are 5 enemies or not
-		else
+	}
+
+	void ObstacleInstantiate ()
+	{
+		//int non-inclusive of top number, never top number
+		ranspawnint = Random.Range (0, 4);
+		if (ranspawnint > 0) 
 		{
+			InstantiatethisObstacle = KnightSprite;
+		} 
 
-			timerPrincess = timeRemainingPrincess;
-
-			countdown = timeRemaining;
-
-			//If there are 5 existing enemies, then wait for something to change
-			if (existingEnemies == 5)
-			{
-
-				StartCoroutine ("Checker");
-
-			}
-
-			//Else call Spawn
-			else
-			{
-
-				SpawnPrincess ();
-
-			}
+		else 
+		{
+			InstantiatethisObstacle = PrincessSprite;
 		}
 
+		Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();
+		Vector3 nospawnonmino = Movementscript.targetPos;
+		Vector3 nospawnonmino2 = Movementscript.lastupdatedpos;
+		int newspawnnumber = Random.Range (0, spawnplacement.Length);
+
+		if (spawnplacement [newspawnnumber].position != nospawnonmino && spawnplacement [newspawnnumber].position != nospawnonmino2) 
+		{
+			Instantiate (InstantiatethisObstacle, spawnplacement [Random.Range (0, spawnplacement.Length)].position, Quaternion.identity);
+			existingEnemies += 1;
+		}
 	}
 
-	//this method spawns an enemy and makes note of it
-	void SpawnKnight()
-	{
-		
-		Instantiate (knight, spawn[Random.Range (0,spawn.Length)].position, Quaternion.identity);
-		existingEnemies += 1;
-
-	}
-
-	void SpawnPrincess()
-	{
-		
-		Instantiate (princess, spawn [Random.Range (0, spawn.Length)].position, Quaternion.identity);
-		existingEnemies += 1;
-
-	}
-
-	IEnumerator Checker()
-	{
-
-		yield return new WaitForSeconds (countdown);
-
-	}
 }

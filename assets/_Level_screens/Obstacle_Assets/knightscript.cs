@@ -12,7 +12,7 @@ public class knightscript : MonoBehaviour
 		{
 			enemySpawn enemySpawn = GameObject.Find ("Game Manager").GetComponent<enemySpawn> ();
 			enemySpawn.existingEnemies -= 1;
-			Destroy (gameObject, .01f);
+			Destroy (gameObject);
 		}
 	}
 }
