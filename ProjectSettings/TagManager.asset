@@ -8,6 +8,7 @@ TagManager:
   - Princess
   - Pillar
   - Stairs
+  - Tiles
   layers:
   - Default
   - TransparentFX
@@ -44,4 +45,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Far Layer
+    uniqueID: 3696303495
+    locked: 0
+  - name: Near Layer
+    uniqueID: 3215961277
+    locked: 0
+  - name: Middle Layer
+    uniqueID: 2628607511
     locked: 0

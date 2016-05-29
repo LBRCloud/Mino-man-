@@ -57,6 +57,7 @@ public class Movementscript : MonoBehaviour
 		
 	void Update ()
 	{
+		gameObject.transform.
 
 		// if strength is below 0
 		if (strength < 0) { //stop all other routines,playdeath animation 2-3 seconds
