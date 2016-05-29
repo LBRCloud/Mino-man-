@@ -61,34 +61,6 @@ public class UnusedReferenceCode : MonoBehaviour {
 //			Destroy (anObstacle.gameObject, 1f);
 			Destroy (gameObject, 1f);
 		}*/
-	//		if (timer > 0) {
-	//			timer -= Time.deltaTime;
-	//		}
-	//
-	//
-	//		else
-	//		{
-	//			existingEnemies += 1;
-	//			timer = timeRemaining;
-	//
-	//			//If there are less than 5 enemies spawn more
-	//			if (existingEnemies <= 5)
-	//			{
-	//				Instantiate (enemy, spawn[Random.Range (0,spawn.Length)].position, Quaternion.identity);
-	//			}
-	//
-	//			else
-	//
-	//		}
-
-	//	public float timeRemaining;
-	//
-	//	public float timer;
-	//
-	//	public GameObject enemy;
-	//
-	//	public int existingEnemies = 1;
-
-	//		timer = timeRemaining;
+	
 
 }
