@@ -55,9 +55,8 @@ public class Movementscript : MonoBehaviour
 
 
 		
-	void Update ()
+	void FixedUpdate ()
 	{
-		gameObject.transform.
 
 		// if strength is below 0
 		if (strength < 0) { //stop all other routines,playdeath animation 2-3 seconds
@@ -144,6 +143,8 @@ public class Movementscript : MonoBehaviour
 					princessscript.enemystrength -= minodmgout;
 					Debug.Log ("Princess's's STR: " + princessscript.enemystrength);
 					Debug.Log ("Mino-man's STR: " + strength);
+					targetPos = transform.position;
+
 				} else if (sight.collider.gameObject.tag == "Knight") {
 
 					//loss of mino strength
@@ -155,6 +156,7 @@ public class Movementscript : MonoBehaviour
 					knightscript.enemystrength -= minodmgout;
 					Debug.Log ("Knight's STR: " + knightscript.enemystrength);
 					Debug.Log ("Mino-man's STR: " + strength);
+					targetPos = transform.position;
 				}
 				// A: What did it hit?
 				else {
@@ -185,13 +187,16 @@ public class Movementscript : MonoBehaviour
 
 			if (stairs != null) 
 			{
-				Debug.Log ("stairs appeared");
-
+				Debug.Log ("STAIRS APPEARED!!!!!!!!");
 			}
 		}
 		else if (targetPos == stairs.transform.position) 
 		{
 			Debug.Log ("you found the stairs");
+			// show defeat canvas
+			defeatcanvas.enabled = true;
+			// destroy mino-man gameobject
+			Destroy (gameObject, 2f);
 		}
 			
 	}

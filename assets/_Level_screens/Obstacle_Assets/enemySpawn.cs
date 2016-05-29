@@ -37,7 +37,7 @@ public class enemySpawn : MonoBehaviour
 	
 
 
-	void Update ()
+	void FixedUpdate ()
 	{
 		if (timeRemaining > 0) 
 		{
@@ -90,7 +90,7 @@ public class enemySpawn : MonoBehaviour
 			spawnplacement [newspawnnumber].position != nospawnondeadobstacle &&
 			spawnplacement [newspawnnumber].position != nospawnonliveobstacle) 
 		{
-			Instantiate (InstantiatethisObstacle, spawnplacement [Random.Range (0, spawnplacement.Length)].position, Quaternion.identity);
+			Instantiate (InstantiatethisObstacle, spawnplacement [newspawnnumber].position, Quaternion.identity);
 
 			existingEnemies += 1;
 		}

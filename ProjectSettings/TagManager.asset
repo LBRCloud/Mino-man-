@@ -9,6 +9,7 @@ TagManager:
   - Pillar
   - Stairs
   - Tiles
+  - Mino-man
   layers:
   - Default
   - TransparentFX

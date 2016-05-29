@@ -10,7 +10,7 @@ public class princessscript : MonoBehaviour
 	public Vector3 obstacleLoc;
 
 
-	void Update()
+	void FixedUpdate()
 	{
 		// update location
 		obstacleLoc = transform.position;

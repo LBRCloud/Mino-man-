@@ -9,7 +9,7 @@ public class knightscript : MonoBehaviour
 	public float enemystrength = 50f;
 	public Vector3 obstacleLoc;
 
-	void Update()
+	void FixedUpdate()
 	{
 		// update location
 		obstacleLoc = transform.position;
