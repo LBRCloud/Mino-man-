@@ -9,13 +9,21 @@ public class Movementscript : MonoBehaviour
 
 {
 
+	public Vector3 dir;
+
 	// last updated position and target position
 	public Vector3 targetPos;
 	public Vector3 lastupdatedpos;
 
+	// last direction
+	public int lastdir;
+
 	//raycast as linecast start and end points (from transform position)
 	public float sightLength = 1.2f;
 	public float sightStart = .7f;
+
+	public bool pausemove = false;
+	public float pausemovetimer = .5f;
 
 
 	public Canvas defeatcanvas;
@@ -48,6 +56,7 @@ public class Movementscript : MonoBehaviour
 
 	void Start () 
 	{
+		dir = Vector3.zero;
 		//set lastupdatedpos Vector3 as targetPos at start.
 		lastupdatedpos = transform.position;
 		targetPos = lastupdatedpos;
@@ -95,29 +104,84 @@ public class Movementscript : MonoBehaviour
 
 
 		// if target is at last "updated" position (position changes finished)
-		if (lastupdatedpos == targetPos) {
+		if (lastupdatedpos == targetPos) 
+		
+		{
 			// controller reset to zero position.
-			Vector3 dir = Vector3.zero;
 
+		
 			// if controller is being used set the direction variable respectfully, also set transform direction.
-			if (Input.GetAxis ("Horizontal") < 0) {
-				dir = Vector3.left;
+			if (Input.GetAxis ("Horizontal") < 0) 
+			
+			{
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, -90);
+				if (lastdir != 2) 
+				{
+					Debug.Log ("left");
+					dir = Vector3.left;
+					lastdir = 1;
+				}
+				else
+				{
+					Debug.Log ("stop  right");
+					dir = Vector3.zero;
+					targetPos = lastupdatedpos;
+					lastdir = 0;
+				}
 			}
 
-			if (Input.GetAxis ("Horizontal") > 0) {
-				dir = Vector3.right;
+			if (Input.GetAxis ("Horizontal") > 0) 
+			{
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, 90);
+				if (lastdir != 1) 
+				{
+					Debug.Log ("right");
+					dir = Vector3.right;
+					lastdir = 2;
+				}
+				else
+				{
+					Debug.Log ("stop left");
+					dir = Vector3.zero;
+					targetPos = lastupdatedpos;
+					lastdir = 0;
+				}
 			}
 
-			if (Input.GetAxis ("Vertical") < 0) {
-				dir = Vector3.down;
+			if (Input.GetAxis ("Vertical") < 0) 
+			{
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, 0);
+				if (lastdir != 4) 
+				{
+					Debug.Log ("down");
+					dir = Vector3.down;
+					lastdir = 3;
+				}
+				else
+				{
+					Debug.Log ("stop up");
+					dir = Vector3.zero;
+					targetPos = lastupdatedpos;
+					lastdir = 0;
+				}
 			}
 
-			if (Input.GetAxis ("Vertical") > 0) {
-				dir = Vector3.up;
+			if (Input.GetAxis ("Vertical") > 0) 
+			{
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, 180);
+				if (lastdir != 3) 
+				{
+					Debug.Log ("up");
+					dir = Vector3.up;
+					lastdir = 4;
+				}
+				else
+				{
+					Debug.Log ("stop down");
+					dir = Vector3.zero;
+					targetPos = lastupdatedpos;
+					lastdir = 0;
+				}
 			}
 
 			// set raycast as linecast from transform position, setting start and end points
@@ -129,7 +193,8 @@ public class Movementscript : MonoBehaviour
 			// if the raycast as linecast has detected a collider (basically if raycast found any collider,
 			// the first one it runs into) 
 			// A: Did it hit something?
-			if (sight.collider != null) {
+			if (sight.collider != null) 
+			{
 				
 				if (sight.collider.gameObject.tag == "Princess") {
 					//Debug.Log ("its a hit!");
@@ -143,7 +208,6 @@ public class Movementscript : MonoBehaviour
 					princessscript.enemystrength -= minodmgout;
 					Debug.Log ("Princess's's STR: " + princessscript.enemystrength);
 					Debug.Log ("Mino-man's STR: " + strength);
-					targetPos = transform.position;
 
 				} else if (sight.collider.gameObject.tag == "Knight") {
 
@@ -156,20 +220,40 @@ public class Movementscript : MonoBehaviour
 					knightscript.enemystrength -= minodmgout;
 					Debug.Log ("Knight's STR: " + knightscript.enemystrength);
 					Debug.Log ("Mino-man's STR: " + strength);
-					targetPos = transform.position;
 				}
 				// A: What did it hit?
 				else {
+
 					//Debug.Log (sight.collider.name);
 					// change the Vector3 target position to the raycast position.
 					targetPos = sight.collider.GetComponent<Transform> ().position;
 				}
 			}
-		} else {
+		} 
+
+		else 
+		
+		{
 			// if transform position is different than the target position, then move towards the position in
 			// relationship of seconds * speed
-			if (transform.position != targetPos) {
+			if (transform.position != targetPos && pausemove == false) 
+			
+			{
 				transform.position = Vector3.MoveTowards (transform.position, targetPos, Time.deltaTime * minomanSpeed);
+			}
+
+			//knight dies pause minoman for .2 seconds
+			else if (pausemove)
+			{
+				pausemovetimer -= Time.deltaTime;
+
+				if (pausemovetimer < 0)
+				{
+					pausemove = false;
+					pausemovetimer = .5f;
+					dir = Vector3.zero;
+					targetPos = lastupdatedpos;
+				}
 			}
 
 			// if for any reason lastupdated position variable isn't = to the traget position, and the current transform

@@ -23,6 +23,10 @@ public class princessscript : MonoBehaviour
 			enemySpawn.nospawnondeadobstacle = transform.position;
 			enemySpawn.existingEnemies -= 1;
 			enemySpawn.princessdeathCount += 1;
+
+			Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();
+			Movementscript.pausemove = true;
+
 			Destroy (gameObject);
 		}
 	}
