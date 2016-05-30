@@ -83,10 +83,12 @@ public class enemySpawn : MonoBehaviour
 
 		Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();
 		Vector3 nospawnonmino = Movementscript.lastupdatedpos;
+		Vector3 nospawnonmino2 = Movementscript.targetPos;
 
 		int newspawnnumber = Random.Range (0, spawnplacement.Length);
 
 		if (spawnplacement [newspawnnumber].position != nospawnonmino &&
+			spawnplacement [newspawnnumber].position != nospawnonmino2 &&
 			spawnplacement [newspawnnumber].position != nospawnondeadobstacle &&
 			spawnplacement [newspawnnumber].position != nospawnonliveobstacle) 
 		{

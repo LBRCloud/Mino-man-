@@ -23,7 +23,7 @@ public class Movementscript : MonoBehaviour
 	public float sightStart = .7f;
 
 	public bool pausemove = false;
-	public float pausemovetimer = .5f;
+	public float pausemovetimer = .2f;
 
 
 	public Canvas defeatcanvas;
@@ -123,10 +123,17 @@ public class Movementscript : MonoBehaviour
 				}
 				else
 				{
-					Debug.Log ("stop  right");
-					dir = Vector3.zero;
+					Debug.Log ("stop right");
 					targetPos = lastupdatedpos;
-					lastdir = 0;
+					dir = Vector3.zero;
+					pausemovetimer -= Time.deltaTime;
+
+					if (pausemovetimer < 0)
+					{
+						lastdir = 0;
+						pausemovetimer = .2f;
+
+					}
 				}
 			}
 
@@ -144,7 +151,14 @@ public class Movementscript : MonoBehaviour
 					Debug.Log ("stop left");
 					dir = Vector3.zero;
 					targetPos = lastupdatedpos;
-					lastdir = 0;
+					pausemovetimer -= Time.deltaTime;
+
+					if (pausemovetimer < 0)
+					{
+						lastdir = 0;
+						pausemovetimer = .2f;
+
+					}			
 				}
 			}
 
@@ -162,7 +176,13 @@ public class Movementscript : MonoBehaviour
 					Debug.Log ("stop up");
 					dir = Vector3.zero;
 					targetPos = lastupdatedpos;
-					lastdir = 0;
+					pausemovetimer -= Time.deltaTime;
+					if (pausemovetimer < 0)
+					{
+						lastdir = 0;
+						pausemovetimer = .2f;
+
+					}
 				}
 			}
 
@@ -180,7 +200,13 @@ public class Movementscript : MonoBehaviour
 					Debug.Log ("stop down");
 					dir = Vector3.zero;
 					targetPos = lastupdatedpos;
-					lastdir = 0;
+					pausemovetimer -= Time.deltaTime;
+					if (pausemovetimer < 0)
+					{
+						lastdir = 0;
+						pausemovetimer = .2f;
+
+					}
 				}
 			}
 
@@ -250,7 +276,7 @@ public class Movementscript : MonoBehaviour
 				if (pausemovetimer < 0)
 				{
 					pausemove = false;
-					pausemovetimer = .5f;
+					pausemovetimer = .1f;
 					dir = Vector3.zero;
 					targetPos = lastupdatedpos;
 				}
@@ -274,7 +300,7 @@ public class Movementscript : MonoBehaviour
 				Debug.Log ("STAIRS APPEARED!!!!!!!!");
 			}
 		}
-		else if (targetPos == stairs.transform.position) 
+		else if (lastupdatedpos == stairs.transform.position) 
 		{
 			Debug.Log ("you found the stairs");
 			// show defeat canvas
