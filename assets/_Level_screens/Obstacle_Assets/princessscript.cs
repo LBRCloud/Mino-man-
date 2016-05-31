@@ -26,6 +26,11 @@ public class princessscript : MonoBehaviour
 
 			Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();
 			Movementscript.pausemove = true;
+			if (Movementscript.ragecount == 0)
+			{
+				Movementscript.ragecount = 1;
+			}
+
 
 			Destroy (gameObject);
 		}

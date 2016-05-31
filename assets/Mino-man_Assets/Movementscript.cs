@@ -43,6 +43,10 @@ public class Movementscript : MonoBehaviour
 	public float strmod;
 	//minoman's damage output
 	public float minodmgout = 1f;
+	//minoman's rage count
+	public int ragecount = 0;
+	public float ragespeed = 1;
+	public float ragedmg = 1;
 	//minoman's current strength icon
 	public int curstricon;
 	public Sprite[] striconstorage;
@@ -66,8 +70,11 @@ public class Movementscript : MonoBehaviour
 		
 	void FixedUpdate ()
 	{
+		//UPDATE STRENGTH ICON
+		strengthicon ();
+		Debug.Log (ragecount);
 
-		// if strength is below 0
+		// MINO-MAN DIED
 		if (strength < 0) { //stop all other routines,playdeath animation 2-3 seconds
 			// show defeat canvas
 			defeatcanvas.enabled = true;
@@ -88,20 +95,16 @@ public class Movementscript : MonoBehaviour
 				//regen
 				strength += strregen;
 				regentimer = .04f;
-				Debug.Log ("Mino-man's STR: " + strength);
+				//Debug.Log ("Mino-man's STR: " + strength);
 				// strength reset to 100 when it goes above 100
 			}
+
 		} else if (strength > 100) {
 			strength = 100;
 			regentimer = .2f;
-			Debug.Log ("Mino-man's STR: " + strength);
+			//Debug.Log ("Mino-man's STR: " + strength);
 		}
-
-		if (strength != null) {
-			strengthicon ();
-		}
-
-
+			
 
 		// if target is at last "updated" position (position changes finished)
 		if (lastupdatedpos == targetPos) 
@@ -117,23 +120,14 @@ public class Movementscript : MonoBehaviour
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, -90);
 				if (lastdir != 2) 
 				{
-					Debug.Log ("left");
+					//Debug.Log ("left");
 					dir = Vector3.left;
 					lastdir = 1;
 				}
 				else
 				{
-					Debug.Log ("stop right");
-					targetPos = lastupdatedpos;
-					dir = Vector3.zero;
-					pausemovetimer -= Time.deltaTime;
-
-					if (pausemovetimer < 0)
-					{
-						lastdir = 0;
-						pausemovetimer = .2f;
-
-					}
+					//Debug.Log ("stop right");
+					minopause ();
 				}
 			}
 
@@ -142,23 +136,14 @@ public class Movementscript : MonoBehaviour
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, 90);
 				if (lastdir != 1) 
 				{
-					Debug.Log ("right");
+					//Debug.Log ("right");
 					dir = Vector3.right;
 					lastdir = 2;
 				}
 				else
 				{
-					Debug.Log ("stop left");
-					dir = Vector3.zero;
-					targetPos = lastupdatedpos;
-					pausemovetimer -= Time.deltaTime;
-
-					if (pausemovetimer < 0)
-					{
-						lastdir = 0;
-						pausemovetimer = .2f;
-
-					}			
+					//Debug.Log ("stop left");
+					minopause ();			
 				}
 			}
 
@@ -167,22 +152,14 @@ public class Movementscript : MonoBehaviour
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, 0);
 				if (lastdir != 4) 
 				{
-					Debug.Log ("down");
+					//Debug.Log ("down");
 					dir = Vector3.down;
 					lastdir = 3;
 				}
 				else
 				{
-					Debug.Log ("stop up");
-					dir = Vector3.zero;
-					targetPos = lastupdatedpos;
-					pausemovetimer -= Time.deltaTime;
-					if (pausemovetimer < 0)
-					{
-						lastdir = 0;
-						pausemovetimer = .2f;
-
-					}
+					//Debug.Log ("stop up");
+					minopause ();
 				}
 			}
 
@@ -191,22 +168,14 @@ public class Movementscript : MonoBehaviour
 				minoman.transform.localEulerAngles = new Vector3 (0, 0, 180);
 				if (lastdir != 3) 
 				{
-					Debug.Log ("up");
+					//Debug.Log ("up");
 					dir = Vector3.up;
 					lastdir = 4;
 				}
 				else
 				{
-					Debug.Log ("stop down");
-					dir = Vector3.zero;
-					targetPos = lastupdatedpos;
-					pausemovetimer -= Time.deltaTime;
-					if (pausemovetimer < 0)
-					{
-						lastdir = 0;
-						pausemovetimer = .2f;
-
-					}
+					//Debug.Log ("stop down");
+					minopause ();
 				}
 			}
 
@@ -231,9 +200,9 @@ public class Movementscript : MonoBehaviour
 
 					//loss of enemy strength
 					princessscript princessscript = sight.collider.gameObject.GetComponent<princessscript> ();
-					princessscript.enemystrength -= minodmgout;
-					Debug.Log ("Princess's's STR: " + princessscript.enemystrength);
-					Debug.Log ("Mino-man's STR: " + strength);
+					princessscript.enemystrength -= minodmgout * ragedmg;
+					//Debug.Log ("Princess's's STR: " + princessscript.enemystrength);
+					//Debug.Log ("Mino-man's STR: " + strength);
 
 				} else if (sight.collider.gameObject.tag == "Knight") {
 
@@ -243,9 +212,9 @@ public class Movementscript : MonoBehaviour
 
 					//loss of enemy strength
 					knightscript knightscript = sight.collider.gameObject.GetComponent<knightscript> ();
-					knightscript.enemystrength -= minodmgout;
-					Debug.Log ("Knight's STR: " + knightscript.enemystrength);
-					Debug.Log ("Mino-man's STR: " + strength);
+					knightscript.enemystrength -= minodmgout * ragedmg;
+					//Debug.Log ("Knight's STR: " + knightscript.enemystrength);
+					//Debug.Log ("Mino-man's STR: " + strength);
 				}
 				// A: What did it hit?
 				else {
@@ -265,21 +234,13 @@ public class Movementscript : MonoBehaviour
 			if (transform.position != targetPos && pausemove == false) 
 			
 			{
-				transform.position = Vector3.MoveTowards (transform.position, targetPos, Time.deltaTime * minomanSpeed);
+				transform.position = Vector3.MoveTowards (transform.position, targetPos, Time.deltaTime * minomanSpeed * ragespeed);
 			}
 
 			//knight dies pause minoman for .2 seconds
 			else if (pausemove)
 			{
-				pausemovetimer -= Time.deltaTime;
-
-				if (pausemovetimer < 0)
-				{
-					pausemove = false;
-					pausemovetimer = .1f;
-					dir = Vector3.zero;
-					targetPos = lastupdatedpos;
-				}
+				minopause ();
 			}
 
 			// if for any reason lastupdated position variable isn't = to the traget position, and the current transform
@@ -290,7 +251,7 @@ public class Movementscript : MonoBehaviour
 			}
 		}
 
-		// NEXT LEVEL
+// NEXT LEVEL
 		if (stairs == null) 
 		{
 			stairs = GameObject.Find ("Stairs(Clone)");
@@ -300,26 +261,66 @@ public class Movementscript : MonoBehaviour
 				Debug.Log ("STAIRS APPEARED!!!!!!!!");
 			}
 		}
+
 		else if (lastupdatedpos == stairs.transform.position) 
 		{
-			Debug.Log ("you found the stairs");
+			Debug.Log ("you found the stairs!!!!");
 			// show defeat canvas
+			targetPos = lastupdatedpos;
+			dir = Vector3.zero;
 			defeatcanvas.enabled = true;
 			// destroy mino-man gameobject
 			Destroy (gameObject, 2f);
 		}
-			
+	
+
+// ENRAGE BUTTON
+		if (Input.GetButtonDown ("Rage") || (Input.GetKeyDown ("r"))) 
+		{
+			// ENRAGED
+			if (ragecount == 1)
+			{
+				StopCoroutine ("enrage");
+				ragespeed = 1f;
+				ragedmg = 1f;
+				Debug.Log ("RAGE OFFFFFF!!!");
+				StartCoroutine ("enrage");
+			}
+			else
+			{
+				Debug.Log ("You can't rage");
+			}
+		} 
+
 	}
 		
 	
 
+	IEnumerator enrage()
+	{
+		Debug.Log("RAAAAAAAAAAAAAAAAAAAAAGE!!!!!");
+		ragespeed = 1.5f;
+		ragedmg = 1.25f;
+		ragecount = 0;
+		yield return new WaitForSeconds (10f);
+		ragespeed = 1f;
+		ragedmg = 1f;
+		Debug.Log ("RAGE OFFFFFF!!!");
+	}
 
 
-
-//				if (Input.GetButtonDown ("Rage")) 
-//					{
-//						//do this thing.
-//					}
+	void minopause ()
+	{
+		targetPos = lastupdatedpos;
+		dir = Vector3.zero;
+		pausemovetimer -= Time.deltaTime;
+		if (pausemovetimer < 0)
+		{
+			lastdir = 0;
+			pausemovetimer = .2f;
+			pausemove = false;
+		}	
+	}
 
 
 	void strengthmodifier ()
