@@ -8,6 +8,8 @@ public class defeatcanvasscript : MonoBehaviour
 {
 
 	public Canvas usable;
+
+
 	 
 	void Start ()
 

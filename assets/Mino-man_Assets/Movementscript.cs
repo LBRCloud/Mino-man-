@@ -337,6 +337,4 @@ public class Movementscript : MonoBehaviour
 		ingamesprite.sprite = striconstorage [curstricon];
 	}
 
-
-
 }
