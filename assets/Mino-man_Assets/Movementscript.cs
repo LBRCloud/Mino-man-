@@ -217,11 +217,13 @@ public class Movementscript : MonoBehaviour
 					//Debug.Log ("Mino-man's STR: " + strength);
 				}
 				// A: What did it hit?
-				else {
-
+				else 
+				{
 					//Debug.Log (sight.collider.name);
-					// change the Vector3 target position to the raycast position.
-					targetPos = sight.collider.GetComponent<Transform> ().position;
+					// change the Vector3 target position to the raycast X AND Y position, BUT USE MINO'S Z POSITION..
+					targetPos = new Vector3 (sight.collider.GetComponent<Transform> ().position.x,
+											 sight.collider.GetComponent<Transform> ().position.y, 
+											 transform.position.z);
 				}
 			}
 		} 
@@ -235,6 +237,7 @@ public class Movementscript : MonoBehaviour
 			
 			{
 				transform.position = Vector3.MoveTowards (transform.position, targetPos, Time.deltaTime * minomanSpeed * ragespeed);
+
 			}
 
 			//knight dies pause minoman for .2 seconds
@@ -262,7 +265,7 @@ public class Movementscript : MonoBehaviour
 			}
 		}
 
-		else if (lastupdatedpos == stairs.transform.position) 
+		else if (lastupdatedpos.x == stairs.transform.position.x && lastupdatedpos.y == stairs.transform.position.y) 
 		{
 			Debug.Log ("you found the stairs!!!!");
 			// show defeat canvas

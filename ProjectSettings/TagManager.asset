@@ -50,9 +50,9 @@ TagManager:
   - name: Far Layer
     uniqueID: 3696303495
     locked: 0
-  - name: Near Layer
-    uniqueID: 3215961277
-    locked: 0
   - name: Middle Layer
     uniqueID: 2628607511
+    locked: 0
+  - name: Near Layer
+    uniqueID: 3215961277
     locked: 0

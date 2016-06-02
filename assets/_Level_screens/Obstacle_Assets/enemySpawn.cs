@@ -58,7 +58,7 @@ public class enemySpawn : MonoBehaviour
 			//spawn stairwell
 			princessdeathCount += 1;
 			Instantiate (nextlevel, spawnplacement [Random.Range
-				(0, spawnplacement.Length)].position, Quaternion.identity);
+				(0, spawnplacement.Length)].position , Quaternion.identity);
 			// stop spawning princesses
 			numprincess = 1;
 		}
