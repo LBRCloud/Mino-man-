@@ -20,7 +20,6 @@ public class princessscript : MonoBehaviour
 		{
 			enemySpawn enemySpawn = GameObject.Find ("Game Manager").GetComponent<enemySpawn> ();
 			// don't spawn where i died
-			enemySpawn.nospawnondeadobstacle = transform.position;
 			enemySpawn.existingEnemies -= 1;
 			enemySpawn.princessdeathCount += 1;
 

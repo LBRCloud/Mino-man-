@@ -6,19 +6,14 @@ using System.Collections.Generic;
 
 public class enemySpawn : MonoBehaviour
 {
-	// CREATING LIST OF OBSTACLES
-	List<GameObject> ObstacleList = new List<GameObject> ();
-
+	
 	//ASSET REFERENCES
 	public Transform[] spawnplacement; //spawn points
 	public GameObject KnightSprite;
 	public GameObject PrincessSprite;
-	public GameObject nextlevel;
+	public GameObject StairwaySprite;
 	public GameObject InstantiatethisObstacle;
 
-	// OBSTACLE LOCATIONS
-	public Vector3 nospawnondeadobstacle = new Vector3 (0, 0, 0);
-	public Vector3 nospawnonliveobstacle = new Vector3 (0, 0, 0);
 
 	// GAMEPLAY
 	public float timeRemaining; // time until next obstacle spawn
@@ -57,7 +52,7 @@ public class enemySpawn : MonoBehaviour
 		{
 			//spawn stairwell
 			princessdeathCount += 1;
-			Instantiate (nextlevel, spawnplacement [Random.Range
+			Instantiate (StairwaySprite, spawnplacement [Random.Range
 				(0, spawnplacement.Length)].position , Quaternion.identity);
 			// stop spawning princesses
 			numprincess = 1;
@@ -69,8 +64,47 @@ public class enemySpawn : MonoBehaviour
 
 	void ObstacleInstantiate ()
 	{
-		//int non-inclusive of top number, never top number
+		// LIST OF BAD SPAWN POINTS
+		List<Vector3> BadSpawnPoints = new List<Vector3> ();
+
+
+		// PLACE TARGET POSITION IN LIST
+		Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();
+		BadSpawnPoints.Add (Movementscript.targetPos);
+
+		// CREATE AN ARRAY FOR SURROUNDING COLLIDERS
+		Collider2D[] TargetRadiusCast = Physics2D.OverlapCircleAll (Movementscript.targetPos, 1.5f);
+
+		// PLACE SURROUNDING COLLIDERS IN LIST
+		foreach (Collider2D col in TargetRadiusCast)
+		{
+			// CHECK FOR TAGS
+			if (col.CompareTag ("Tiles"))
+			{
+				// ADD TAG SPAWN POINTS TO BAD LIST
+				BadSpawnPoints.Add (col.transform.position);
+			}
+		}
+
+		// CREATE SPAWN POINT FOR OBSTACLE 
+		int newspawnnumber = Random.Range (0, spawnplacement.Length);
+		Vector3 AnySpawnPoint = spawnplacement [newspawnnumber].position;
+
+
+		// DISALLOW PRINCESS IF ONE IS IN SCENE
+		GameObject princessalive = GameObject.Find ("Princess_Sprite(Clone)");
+		if (princessalive)
+		{
+			numprincess = 1;
+		}
+		else
+		{
+			numprincess = 0;
+		}
+
+		// CHOOSE RANDOM OBSTACLE
 		ranspawnint = Random.Range (numprincess, 4);
+
 		if (ranspawnint > 0) 
 		{
 			InstantiatethisObstacle = KnightSprite;
@@ -80,24 +114,15 @@ public class enemySpawn : MonoBehaviour
 		{
 			InstantiatethisObstacle = PrincessSprite;
 		}
+			
 
-		Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();
-		Vector3 nospawnonmino = Movementscript.lastupdatedpos;
-		Vector3 nospawnonmino2 = Movementscript.targetPos;
-
-		int newspawnnumber = Random.Range (0, spawnplacement.Length);
-
-		if (spawnplacement [newspawnnumber].position != nospawnonmino &&
-			spawnplacement [newspawnnumber].position != nospawnonmino2 &&
-			spawnplacement [newspawnnumber].position != nospawnondeadobstacle &&
-			spawnplacement [newspawnnumber].position != nospawnonliveobstacle) 
+		// SPAWN OBSTACLE
+		if (!BadSpawnPoints.Contains (AnySpawnPoint))
 		{
-			Instantiate (InstantiatethisObstacle, spawnplacement [newspawnnumber].position, Quaternion.identity);
-
+			Instantiate (InstantiatethisObstacle, AnySpawnPoint, Quaternion.identity);
 			existingEnemies += 1;
 		}
-
-
+			
 
 	}
 }

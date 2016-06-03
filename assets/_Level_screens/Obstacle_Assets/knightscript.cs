@@ -18,7 +18,6 @@ public class knightscript : MonoBehaviour
 		
 		{
 			enemySpawn enemySpawn = GameObject.Find ("Game Manager").GetComponent<enemySpawn> ();
-			enemySpawn.nospawnondeadobstacle = transform.position;
 			enemySpawn.existingEnemies -= 1;
 
 			Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();

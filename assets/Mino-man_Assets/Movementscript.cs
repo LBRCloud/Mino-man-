@@ -47,10 +47,6 @@ public class Movementscript : MonoBehaviour
 	public int ragecount = 0;
 	public float ragespeed = 1;
 	public float ragedmg = 1;
-	//minoman's current strength icon
-	public int curstricon;
-	public Sprite[] striconstorage;
-	public SpriteRenderer ingamesprite;
 
 
 
@@ -70,8 +66,7 @@ public class Movementscript : MonoBehaviour
 		
 	void FixedUpdate ()
 	{
-		//UPDATE STRENGTH ICON
-		strengthicon ();
+
 		Debug.Log (ragecount);
 
 		// MINO-MAN DIED
@@ -333,11 +328,6 @@ public class Movementscript : MonoBehaviour
 		else 
 		{strmod = strength * .01f;}
 	}
-
-	void strengthicon ()
-	{
-		curstricon = (int)Mathf.Floor (strength / 15) -1;
-		ingamesprite.sprite = striconstorage [curstricon];
-	}
+		
 
 }
