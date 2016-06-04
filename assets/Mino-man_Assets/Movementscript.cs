@@ -252,7 +252,7 @@ public class Movementscript : MonoBehaviour
 // NEXT LEVEL
 		if (stairs == null) 
 		{
-			stairs = GameObject.Find ("Stairs(Clone)");
+			stairs = GameObject.Find ("Stairway_Sprite(Clone)");
 
 			if (stairs != null) 
 			{

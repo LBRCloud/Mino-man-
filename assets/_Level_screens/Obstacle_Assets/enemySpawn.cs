@@ -13,6 +13,7 @@ public class enemySpawn : MonoBehaviour
 	public GameObject PrincessSprite;
 	public GameObject StairwaySprite;
 	public GameObject InstantiatethisObstacle;
+	public GameObject Icon;
 
 
 	// GAMEPLAY
@@ -28,6 +29,7 @@ public class enemySpawn : MonoBehaviour
 	void Start ()
 	{
 		timeRemaining = 5f;
+		Instantiate (Icon);
 	}
 	
 
@@ -91,14 +93,16 @@ public class enemySpawn : MonoBehaviour
 		Vector3 AnySpawnPoint = spawnplacement [newspawnnumber].position;
 
 
-		// DISALLOW PRINCESS IF ONE IS IN SCENE
+		// DISALLOW PRINCESS IF ONE IS IN SCENE?
 		GameObject princessalive = GameObject.Find ("Princess_Sprite(Clone)");
 		if (princessalive)
 		{
+			// DISALLOW
 			numprincess = 1;
 		}
 		else
 		{
+			// ALLOW
 			numprincess = 0;
 		}
 
@@ -109,7 +113,6 @@ public class enemySpawn : MonoBehaviour
 		{
 			InstantiatethisObstacle = KnightSprite;
 		} 
-
 		else 
 		{
 			InstantiatethisObstacle = PrincessSprite;

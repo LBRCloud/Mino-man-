@@ -11,25 +11,14 @@ public class strengthicon : MonoBehaviour
 	public Sprite[] striconstorage;
 	public SpriteRenderer ingamesprite;
 
-	void Start () 
+		void Update ()
 	{
-		Instantiate (StrengthIcon);
-	}
-	void Update () 
-
-	{
-		//strengthsprite = strengthsprite.GetComponent<Sprite> ();
-
-
-		/*minogrey = gameObject.GetComponent<SpriteRenderer> ().color;
-		minogrey = new Color (.5f, .1f, .9f);*/
+		Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();
+		curstricon = (int)Mathf.Floor (Movementscript.strength / 5) -1;
+		Sprite strengthicon = gameObject.GetComponent<SpriteRenderer> ().sprite = striconstorage [curstricon];
+		ingamesprite.sprite = strengthicon;
+		//Debug.Log ("this happened");
 	}
 
-
-//	void strengthicongo ()
-//	{
-//		curstricon = (int)Mathf.Floor (strength / 15) -1;
-//		ingamesprite.sprite = striconstorage [curstricon];
-//	}
 
 }
