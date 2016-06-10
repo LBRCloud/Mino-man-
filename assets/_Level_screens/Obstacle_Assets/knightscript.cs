@@ -42,8 +42,6 @@ public class knightscript : MonoBehaviour
 
 			Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();
 			Movementscript.pausemove = true;
-			Movementscript.engaged = false;
-			Movementscript.stillengaged = false;
 
 			Destroy (gameObject);
 		}
@@ -53,28 +51,26 @@ public class knightscript : MonoBehaviour
 		{
 			// FACE MINO WHEN ENGAGED
 			Vector3 Minoman = GameObject.Find ("Mino-man_Sprite").transform.position;
-//			Vector3 Vecdif = (Minoman - transform.position).normalized;
-//			float angle = Mathf.Atan2 (Minoman.y, Minoman.x) * Mathf.Rad2Deg;
-//			transform.rotation = Quaternion.Euler (0f, 0f, angle -90);
+
 			if (Minoman.x < transform.position.x)
 			{
 				transform.localEulerAngles = new Vector3 (0, 0, -90);
-				Debug.Log ("West to face Minoman");
+				//Debug.Log ("West to face Minoman");
 			}
 			if (Minoman.x > transform.position.x)
 			{
 				transform.localEulerAngles = new Vector3 (0, 0, 90);
-				Debug.Log ("East to face Minoman");
+				//Debug.Log ("East to face Minoman");
 			}
 			if (Minoman.y < transform.position.y)
 			{
 				transform.localEulerAngles = new Vector3 (0, 0, 0);
-				Debug.Log ("South to face Minoman");
+				//Debug.Log ("South to face Minoman");
 			}
 			if (Minoman.y > transform.position.y)
 			{
 				transform.localEulerAngles = new Vector3 (0, 0, -180);
-				Debug.Log ("North to face Minoman");
+				//Debug.Log ("North to face Minoman");
 			}
 		}
 			
@@ -103,25 +99,25 @@ public class knightscript : MonoBehaviour
 		{
 			transform.localEulerAngles = new Vector3 (0, 0, 0);
 			knightdir = Vector3.down;
-			Debug.Log ("South");
+			//Debug.Log ("South");
 		}
 		if (knightdirnum == 2) 
 		{
 			transform.localEulerAngles = new Vector3 (0, 0, -90);
 			knightdir = Vector3.left;
-			Debug.Log ("West");
+			//Debug.Log ("West");
 		}
 		if (knightdirnum == 3) 
 		{
 			transform.localEulerAngles = new Vector3 (0, 0, -180);
 			knightdir = Vector3.up;
-			Debug.Log ("North");
+			//Debug.Log ("North");
 		}
 		if (knightdirnum == 4) 
 		{
 			transform.localEulerAngles = new Vector3 (0, 0, 90);
 			knightdir = Vector3.right;
-			Debug.Log ("East");
+			//Debug.Log ("East");
 		}
 	}
 

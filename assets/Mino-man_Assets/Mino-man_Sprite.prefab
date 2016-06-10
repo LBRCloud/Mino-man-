@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 115330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.4121753, y: 0.32428968, z: 0.32428968}
+  m_LocalScale: {x: 0.3369293, y: 0.26508793, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -92,6 +92,11 @@ MonoBehaviour:
   ragecount: 0
   ragespeed: 1
   ragedmg: 1
+  bloodsquirt: {fileID: 114832, guid: 96ed2efaf9ff91b4e94a273be09d224c, type: 2}
+  bloodsquirt2: {fileID: 164978, guid: 910141b81b55617468a26cad4117c270, type: 2}
+  bloodpool: {fileID: 127448, guid: 915f57b662fd5814493975481a60d042, type: 2}
+  engaged: 0
+  bloodeverywhere: 0
   stairs: {fileID: 0}
 --- !u!212 &21261332
 SpriteRenderer:

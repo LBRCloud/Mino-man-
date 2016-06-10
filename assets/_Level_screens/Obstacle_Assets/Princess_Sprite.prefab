@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3523648, y: -1.133222, z: -1}
-  m_LocalScale: {x: 0.50650954, y: 0.50650954, z: 0.50650954}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.50650954}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,6 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemystrength: 20
   obstacleLoc: {x: 0, y: 0, z: 0}
+  princessengaged: 0
 --- !u!212 &21213650
 SpriteRenderer:
   m_ObjectHideFlags: 1

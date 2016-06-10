@@ -28,7 +28,7 @@ public class Movementscript : MonoBehaviour
 
 	public Canvas defeatcanvas;
 
-
+	public RaycastHit2D sight;
 
 	// minoman's game object
 	public GameObject minoman;
@@ -56,7 +56,7 @@ public class Movementscript : MonoBehaviour
 
 	// engaged
 	public bool engaged = false;
-	public bool stillengaged = false;
+	public bool bloodeverywhere = false;
 
 	//stair location
 	public GameObject stairs;
@@ -183,7 +183,7 @@ public class Movementscript : MonoBehaviour
 			}
 
 			// set raycast as linecast from transform position, setting start and end points
-			RaycastHit2D sight = Physics2D.Linecast (transform.position + (dir * sightStart), transform.position + (dir * sightLength));
+			sight = Physics2D.Linecast (transform.position + (dir * sightStart), transform.position + (dir * sightLength));
 			Debug.DrawLine (transform.position + (dir * sightStart), transform.position + (dir * sightLength), Color.red, 1.5f);
 
 
@@ -193,39 +193,41 @@ public class Movementscript : MonoBehaviour
 			// A: Did it hit something?
 			if (sight.collider != null) 
 			{
+				knightscript knightscript = sight.collider.gameObject.GetComponent<knightscript> ();
+				princessscript princessscript = sight.collider.gameObject.GetComponent<princessscript> ();
 				
-				if (sight.collider.gameObject.tag == "Princess") {
-					//Debug.Log ("its a hit!");
+				if (sight.collider.gameObject.tag == "Princess") 
+				{
+					// Squirt blood
+					blood ();
 
 					//loss of strength
 					strengthmodifier ();
 					strength -= strmod;
 
 					//loss of enemy strength
-					princessscript princessscript = sight.collider.gameObject.GetComponent<princessscript> ();
+
 					princessscript.enemystrength -= minodmgout * ragedmg;
 					princessscript.princessengaged = true;
 					//Debug.Log ("Princess's's STR: " + princessscript.enemystrength);
 					//Debug.Log ("Mino-man's STR: " + strength);
 
-				} else if (sight.collider.gameObject.tag == "Knight") {
+				} 
 
+				else if (sight.collider.gameObject.tag == "Knight") 
+				{
+					// Squirt blood
+					blood ();
+					
 					//loss of mino strength
 					strengthmodifier ();
-//blood
+
 					strength -= strmod;
-					engaged = true;
-					if (engaged && !stillengaged)
-					{
-					Instantiate (bloodsquirt);
-					Instantiate (bloodsquirt2);
-					Instantiate (bloodpool);
-					stillengaged = true;
-					}
-					//loss of enemy strength
-					knightscript knightscript = sight.collider.gameObject.GetComponent<knightscript> ();
-					knightscript.knightstrength -= minodmgout * ragedmg;
+					// Knight face mino
 					knightscript.knightengaged = true;
+					// Knight takes strength damage
+					knightscript.knightstrength -= minodmgout * ragedmg;
+
 					//Debug.Log ("Knight's STR: " + knightscript.enemystrength);
 					//Debug.Log ("Mino-man's STR: " + strength);
 				}
@@ -237,6 +239,15 @@ public class Movementscript : MonoBehaviour
 					targetPos = new Vector3 (sight.collider.GetComponent<Transform> ().position.x,
 											 sight.collider.GetComponent<Transform> ().position.y, 
 											 transform.position.z);
+					//Debug.Log ("No Engagement");
+
+					bloodeverywhere = false;
+					GameObject Blood1 = GameObject.Find ("Blood_Splatter_01(Clone)");
+					Destroy (Blood1);
+					GameObject Blood2 = GameObject.Find ("Blood_Splatter_02(Clone)");
+					Destroy (Blood2);
+					GameObject Bloodp = GameObject.Find ("Blood_Pool(Clone)");
+					Destroy (Bloodp);
 				}
 			}
 		} 
@@ -270,7 +281,7 @@ public class Movementscript : MonoBehaviour
 // NEXT LEVEL
 		if (stairs == null) 
 		{
-			stairs = GameObject.Find ("Stairway_Sprite(Clone)");
+			stairs = GameObject.Find ("Tile_Stairs(Clone)");
 
 			if (stairs != null) 
 			{
@@ -299,12 +310,12 @@ public class Movementscript : MonoBehaviour
 				StopCoroutine ("enrage");
 				ragespeed = 1f;
 				ragedmg = 1f;
-				Debug.Log ("RAGE OFFFFFF!!!");
+				//Debug.Log ("RAGE OFFFFFF!!!");
 				StartCoroutine ("enrage");
 			}
 			else
 			{
-				Debug.Log ("You can't rage");
+				//Debug.Log ("You can't rage");
 			}
 		} 
 
@@ -314,14 +325,14 @@ public class Movementscript : MonoBehaviour
 
 	IEnumerator enrage()
 	{
-		Debug.Log("RAAAAAAAAAAAAAAAAAAAAAGE!!!!!");
+		//Debug.Log("RAAAAAAAAAAAAAAAAAAAAAGE!!!!!");
 		ragespeed = 1.5f;
 		ragedmg = 1.25f;
 		ragecount = 0;
 		yield return new WaitForSeconds (10f);
 		ragespeed = 1f;
 		ragedmg = 1f;
-		Debug.Log ("RAGE OFFFFFF!!!");
+		//Debug.Log ("RAGE OFFFFFF!!!");
 	}
 
 
@@ -345,6 +356,18 @@ public class Movementscript : MonoBehaviour
 		{strmod = .5f;} 
 		else 
 		{strmod = strength * .01f;}
+	}
+
+	void blood ()
+	{
+		if (!bloodeverywhere)
+		{
+			// Blood on Knight
+			Instantiate (bloodsquirt, sight.collider.transform.position, Quaternion.Euler (transform.localEulerAngles));
+			Instantiate (bloodsquirt2, sight.collider.transform.position, Quaternion.Euler (transform.localEulerAngles));
+			Instantiate (bloodpool, sight.collider.transform.position, Quaternion.Euler (transform.localEulerAngles));
+			bloodeverywhere = true;
+		}
 	}
 		
 
