@@ -43,12 +43,20 @@ public class Movementscript : MonoBehaviour
 	public float strmod;
 	//minoman's damage output
 	public float minodmgout = 1f;
+
 	//minoman's rage count
 	public int ragecount = 0;
 	public float ragespeed = 1;
 	public float ragedmg = 1;
 
+	public GameObject bloodsquirt;
+	public GameObject bloodsquirt2;
+	public GameObject bloodpool;
 
+
+	// engaged
+	public bool engaged = false;
+	public bool stillengaged = false;
 
 	//stair location
 	public GameObject stairs;
@@ -204,8 +212,16 @@ public class Movementscript : MonoBehaviour
 
 					//loss of mino strength
 					strengthmodifier ();
+//blood
 					strength -= strmod;
-
+					engaged = true;
+					if (engaged && !stillengaged)
+					{
+					Instantiate (bloodsquirt);
+					Instantiate (bloodsquirt2);
+					Instantiate (bloodpool);
+					stillengaged = true;
+					}
 					//loss of enemy strength
 					knightscript knightscript = sight.collider.gameObject.GetComponent<knightscript> ();
 					knightscript.knightstrength -= minodmgout * ragedmg;

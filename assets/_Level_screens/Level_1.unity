@@ -1279,7 +1279,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 408298, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.79
       objectReference: {fileID: 0}
     - target: {fileID: 408298, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1310,42 +1310,17 @@ Prefab:
       value: 
       objectReference: {fileID: 829578851}
     - target: {fileID: 11410238, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
-      propertyPath: ingamesprite
+      propertyPath: bloodsquirt
       value: 
-      objectReference: {fileID: 21222280, guid: c2d462655894f6b45b9bfd9047685b0a,
-        type: 2}
-    - target: {fileID: 21261332, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
-      propertyPath: m_SortingLayerID
-      value: -1079006019
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 163610, guid: a6243a8e4826f0a448e6ab706dab19ab, type: 2}
     - target: {fileID: 11410238, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
-      propertyPath: stairs
+      propertyPath: bloodsquirt2
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 115330, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
-      propertyPath: m_TagString
-      value: Mino-man
-      objectReference: {fileID: 0}
-    - target: {fileID: 408298, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.4121753
-      objectReference: {fileID: 0}
-    - target: {fileID: 408298, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.32428968
-      objectReference: {fileID: 0}
-    - target: {fileID: 408298, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.32428968
-      objectReference: {fileID: 0}
-    - target: {fileID: 21261332, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 171116, guid: 94d47ad8d8d16124db199e1f7fd1bf3f, type: 2}
     - target: {fileID: 11410238, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
-      propertyPath: minoman
+      propertyPath: bloodpool
       value: 
-      objectReference: {fileID: 800085537}
+      objectReference: {fileID: 130630, guid: 1a627742490b3944a9ecb5ca461ac36f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
   m_IsPrefabParent: 0
@@ -6018,10 +5993,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 378040638}
   m_RootOrder: 84
---- !u!1 &800085537 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 115330, guid: bcab7e71a9922574bb59591a18855d07, type: 2}
-  m_PrefabInternal: {fileID: 205684071}
 --- !u!1 &809731958
 GameObject:
   m_ObjectHideFlags: 0

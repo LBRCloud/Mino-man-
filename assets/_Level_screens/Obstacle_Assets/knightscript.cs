@@ -42,6 +42,8 @@ public class knightscript : MonoBehaviour
 
 			Movementscript Movementscript = GameObject.Find ("Mino-man_Sprite").GetComponent<Movementscript>();
 			Movementscript.pausemove = true;
+			Movementscript.engaged = false;
+			Movementscript.stillengaged = false;
 
 			Destroy (gameObject);
 		}
