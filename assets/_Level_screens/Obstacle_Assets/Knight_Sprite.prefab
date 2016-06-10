@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1771581, y: -1.5007429, z: -1}
-  m_LocalScale: {x: 0.65377235, y: 0.6537723, z: 0.6537723}
+  m_LocalPosition: {x: -1.1771581, y: -1.5, z: -1}
+  m_LocalScale: {x: 0.65377235, y: 0.6537723, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,8 +73,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a81c77012344a805c848aca4f19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemystrength: 50
+  knightstrength: 50
   obstacleLoc: {x: 0, y: 0, z: 0}
+  knightdirnum: 0
+  dirtimer: 10
+  knightengaged: 0
+  knightdir: {x: 0, y: 0, z: 0}
+  knightsightLength: 1.2
+  knightsightStart: 0.7
 --- !u!212 &21264672
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -100,7 +106,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1079006019
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 79db70ab266e60342af0ba729d283990, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -140,6 +146,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -1079006019
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

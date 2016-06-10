@@ -67,7 +67,7 @@ public class Movementscript : MonoBehaviour
 	void FixedUpdate ()
 	{
 
-		Debug.Log (ragecount);
+		//Debug.Log (ragecount);
 
 		// MINO-MAN DIED
 		if (strength < 0) { //stop all other routines,playdeath animation 2-3 seconds
@@ -112,7 +112,7 @@ public class Movementscript : MonoBehaviour
 			if (Input.GetAxis ("Horizontal") < 0) 
 			
 			{
-				minoman.transform.localEulerAngles = new Vector3 (0, 0, -90);
+				transform.localEulerAngles = new Vector3 (0, 0, -90);
 				if (lastdir != 2) 
 				{
 					//Debug.Log ("left");
@@ -128,7 +128,7 @@ public class Movementscript : MonoBehaviour
 
 			if (Input.GetAxis ("Horizontal") > 0) 
 			{
-				minoman.transform.localEulerAngles = new Vector3 (0, 0, 90);
+				transform.localEulerAngles = new Vector3 (0, 0, 90);
 				if (lastdir != 1) 
 				{
 					//Debug.Log ("right");
@@ -144,7 +144,7 @@ public class Movementscript : MonoBehaviour
 
 			if (Input.GetAxis ("Vertical") < 0) 
 			{
-				minoman.transform.localEulerAngles = new Vector3 (0, 0, 0);
+				transform.localEulerAngles = new Vector3 (0, 0, 0);
 				if (lastdir != 4) 
 				{
 					//Debug.Log ("down");
@@ -160,7 +160,7 @@ public class Movementscript : MonoBehaviour
 
 			if (Input.GetAxis ("Vertical") > 0) 
 			{
-				minoman.transform.localEulerAngles = new Vector3 (0, 0, 180);
+				transform.localEulerAngles = new Vector3 (0, 0, 180);
 				if (lastdir != 3) 
 				{
 					//Debug.Log ("up");
@@ -196,6 +196,7 @@ public class Movementscript : MonoBehaviour
 					//loss of enemy strength
 					princessscript princessscript = sight.collider.gameObject.GetComponent<princessscript> ();
 					princessscript.enemystrength -= minodmgout * ragedmg;
+					princessscript.princessengaged = true;
 					//Debug.Log ("Princess's's STR: " + princessscript.enemystrength);
 					//Debug.Log ("Mino-man's STR: " + strength);
 
@@ -207,7 +208,8 @@ public class Movementscript : MonoBehaviour
 
 					//loss of enemy strength
 					knightscript knightscript = sight.collider.gameObject.GetComponent<knightscript> ();
-					knightscript.enemystrength -= minodmgout * ragedmg;
+					knightscript.knightstrength -= minodmgout * ragedmg;
+					knightscript.knightengaged = true;
 					//Debug.Log ("Knight's STR: " + knightscript.enemystrength);
 					//Debug.Log ("Mino-man's STR: " + strength);
 				}

@@ -8,7 +8,7 @@ public class princessscript : MonoBehaviour
 {
 	public float enemystrength = 20f;
 	public Vector3 obstacleLoc;
-
+	public bool princessengaged = false;
 
 	void FixedUpdate()
 	{
@@ -18,6 +18,8 @@ public class princessscript : MonoBehaviour
 		if (enemystrength < 0f) 
 
 		{
+			//PRINCESS DEATH
+			princessengaged = false;
 			enemySpawn enemySpawn = GameObject.Find ("Game Manager").GetComponent<enemySpawn> ();
 			// don't spawn where i died
 			enemySpawn.existingEnemies -= 1;
