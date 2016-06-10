@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:assets/Resources/Concept_Art/Blood_Hit_2.png.meta
 guid: c37a707c0f170eb4b9fb858ef1bcf064
 timeCreated: 1465526876
+=======
+guid: 5d5af06d01df65544853e8d2cd058eb7
+timeCreated: 1465528293
+>>>>>>> origin/master:assets/Resources/Concept_Art/Blood_Hit_2.png.meta
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
@@ -30,7 +35,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0

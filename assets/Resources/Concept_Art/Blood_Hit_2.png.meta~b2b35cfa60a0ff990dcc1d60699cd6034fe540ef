@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:assets/Resources/Concept_Art/Blood_Hit_1.psd.meta
-guid: 69c68c33683738644bcc2de0d65eb245
-timeCreated: 1465526876
-=======
-guid: 4e118517f0d12dc49b95c4e814a12fbf
-timeCreated: 1465528292
->>>>>>> origin/master:assets/Resources/Concept_Art/Blood_Hit_1.psd.meta
+guid: 5d5af06d01df65544853e8d2cd058eb7
+timeCreated: 1465528293
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
